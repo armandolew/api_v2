@@ -1,7 +1,7 @@
 module API
   module V1
     class Api::V1::EventsController < ApplicationController
-      before_action :set_event, only: [:show, :update, :destroy]
+      before_action :set_event, only: [:update, :destroy]
 
       # GET /events
       # GET /events.json
@@ -24,6 +24,10 @@ module API
         @event.generate_token
 
         if @event.save
+          user = User.find_by(:id => event_params[:user_id])
+          if !user.nil?
+            NotificationsMailer.delay(:queue => 'notifications').send_notification(user.id)
+          end
           render 'api/v1/events/show', status: :created
         else
           render 'api/v1/events/show', status: :unprocessable_entity
@@ -49,12 +53,12 @@ module API
       private
         # Use callbacks to share common setup or constraints between actions.
         def set_event
-          @event = Event.find(params[:id])
+          @event = Event.find_by(:id => params[:id])
         end
 
         # Never trust parameters from the scary internet, only allow the white list through.
         def event_params
-          params.require(:event).permit(:name, :date, :location, :latitude, :longitude)
+          params.require(:event).permit(:name, :date, :location, :latitude, :longitude, :user_id)
         end
     end
   end

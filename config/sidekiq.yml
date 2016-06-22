@@ -1,10 +1,9 @@
 ---
-:concurrency: 2
+:concurrency: 5
+:pidfile: tmp/pids/sidekiq.pid
 staging:
-  :concurrency: 2
+  :concurrency: 10
 production:
-  :concurrency: 2
+  :concurrency: 10
 :queues:
-  - [paperclip, 2] # More weight since image processing happens frequently
-  - notifications # For mails and push notifications
-  - default # For geocoding and newsletter
+  - notifications
