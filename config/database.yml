@@ -23,7 +23,9 @@ default: &default
 
 development:
   <<: *default
-  database: api_v2_development
+  database: api_v2
+  username: api_v2_user
+  password: 4p1_v2_us3r
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
