@@ -6,8 +6,8 @@ Rails.application.initialize!
 
 #Mailer
 ActionMailer::Base.smtp_settings = {
-  :user_name => 'armando@noiselab.com',
-  :password => 'lewtam16',
+  :user_name => ENV['MAIL_USERNAME'],
+  :password => ENV['MAIL_PASSWORD'],
   :domain => 'gmail.com',
   :address => 'smtp.gmail.com',
   :port => 587,
