@@ -2,7 +2,7 @@ if @event.valid?
   json.success true
   json.message "Event fetched succesfully"
   json.event do
-    json.extract! @event, :id, :name, :date, :location, :latitude, :longitude, :creator, :created_at, :updated_at, :token
+    json.extract! @event, :id, :name, :date, :location, :latitude, :longitude, :user_id, :created_at, :updated_at, :token
     if !@event.photos.nil?
       json.photos @event.photos do |photo|
         json.partial! 'api/v1/events/photo', locals: { photo: photo }

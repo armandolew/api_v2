@@ -1,9 +1,12 @@
 if @photo.valid?
   json.success true
   json.message "Photo fetched succesfully"
-  json.photo do
-    json.extract! @photo, :id, :title, :caption, :event_id, :created_at, :updated_at, :image
-  end
+  json.id @photo.id
+  json.title @photo.title
+  json.caption @photo.caption
+  json.created_at @photo.created_at
+  json.image @photo.image.url
+  json.thumb @photo.image.thumb.url
 else
   json.success false
   json.message @photo.errors

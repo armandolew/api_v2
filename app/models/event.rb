@@ -1,5 +1,6 @@
 class Event < ApplicationRecord
   has_many :photos
+  belongs_to :user
 
   validates :name, presence: true, on: :create
   validates :date, presence: true, on: :create
